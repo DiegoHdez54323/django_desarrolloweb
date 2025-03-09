@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menú Principal</title>
+    <link href="{% static 'css/output.css' %}" rel="stylesheet" />
+  </head>
+  <body class="bg-gray-100">
+    <div class="min-h-screen flex flex-col items-center pt-10">
+      <h1 class="text-4xl font-bold mb-8">Menú Principal</h1>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl px-4">
+        <!-- Cada enlace apunta a la vista "module" pasando el nombre del módulo -->
+        <a
+          href="{% url 'module' 'Archivo' %}"
+          class="block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-4 px-6 rounded shadow text-center transition duration-200"
+        >
+          Archivo
+        </a>
+        <a
+          href="{% url 'module' 'Catálogos' %}"
+          class="block bg-green-500 hover:bg-green-600 text-white font-semibold py-4 px-6 rounded shadow text-center transition duration-200"
+        >
+          Catálogos
+        </a>
+        <a
+          href="{% url 'module' 'Procesos' %}"
+          class="block bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-4 px-6 rounded shadow text-center transition duration-200"
+        >
+          Procesos
+        </a>
+        <a
+          href="{% url 'module' 'Reportes' %}"
+          class="block bg-red-500 hover:bg-red-600 text-white font-semibold py-4 px-6 rounded shadow text-center transition duration-200"
+        >
+          Reportes
+        </a>
+        <a
+          href="{% url 'alumnos_list' %}"
+          class="block bg-purple-500 hover:bg-purple-600 text-white font-semibold py-4 px-6 rounded shadow text-center transition duration-200"
+        >
+          Alumnos
+        </a>
+        <a
+          href="{% url 'module' 'Salir' %}"
+          class="block bg-gray-700 hover:bg-gray-800 text-white font-semibold py-4 px-6 rounded shadow text-center transition duration-200"
+        >
+          Salir
+        </a>
+      </div>
+    </div>
+    <script src="{% static 'js/flowbite.min.js' %}"></script>
+  </body>
+</html>
