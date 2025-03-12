@@ -1,18 +1,38 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.views import View
 from .models import Alumno
+
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from rest_framework import viewsets
+from .serializers import AlumnoSerializer
+
+class AlumnoViewSet(View):
+    def get(self, request, id = 0):
+        if (id > 0):
+            MisAlumnos = list(Alumno.objects.values())
+            if (len(MisAlumnos) > 0):
+                alumno = MisAlumnos[0]
+                msm = {'message': 'Exito', 'Alumno': alumno}
+            else:
+                msm = {'message': 'No hay alumnos registrados'}
+            return JsonResponse(msm)
+        else:
+            MisAlumnos = list(Alumno.objects.values())
+            if (len(MisAlumnos) > 0):
+                msm = {'message': 'Exito', 'Alumno': MisAlumnos}
+            else:
+                msm = {'message': 'No hay alumnos registrados'}
+            return JsonResponse(msm)
+    
+
+
 
 def menu(request):
     return render(request, 'menu.html')
 
 def module(request, module_name):
-    """
-    Vista para cada módulo.
-    
-    Si se selecciona "Salir", se muestra un mensaje especial.
-    Para las demás opciones, se muestra un mensaje de bienvenida indicando el módulo.
-    """
-    
     message = f"Bienvenido al módulo de {module_name}."
     
     # Se renderiza la plantilla 'module.html' pasando el nombre del módulo y el mensaje
@@ -57,3 +77,4 @@ def alumno_create(request):
         except Exception as e:
             return JsonResponse({'success': False, 'error': str(e)})
     return JsonResponse({'success': False, 'error': 'Invalid request method.'})
+
