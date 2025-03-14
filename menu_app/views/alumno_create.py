@@ -1,34 +1,6 @@
-from django.shortcuts import render
+from menu_app.models import Alumno
+
 from django.http import JsonResponse
-from .models import Alumno
-
-def menu(request):
-    return render(request, 'menu.html')
-
-def module(request, module_name):
-    """
-    Vista para cada módulo.
-    
-    Si se selecciona "Salir", se muestra un mensaje especial.
-    Para las demás opciones, se muestra un mensaje de bienvenida indicando el módulo.
-    """
-    
-    message = f"Bienvenido al módulo de {module_name}."
-    
-    # Se renderiza la plantilla 'module.html' pasando el nombre del módulo y el mensaje
-    return render(request, 'module.html', {
-        'module_name': module_name,
-        'message': message
-    })
-
-def alumnos_list(request):
-    # Se obtiene la lista de alumnos
-    alumnos = Alumno.objects.all().order_by('nombre')
-    
-    # Se renderiza la plantilla 'alumnos_list.html' pasando la lista de alumnos
-    return render(request, 'alumnos_list.html', {
-        'alumnos': alumnos
-    })
 
 def alumno_create(request):
     if request.method == 'POST' and request.headers.get('x-requested-with') == 'XMLHttpRequest':
